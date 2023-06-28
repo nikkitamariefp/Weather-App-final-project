@@ -101,3 +101,7 @@ input:placeholder {
   border-radius: 8px;
   margin-top: 10px;
 }
+
+.creator {
+  padding: 15px;
+}

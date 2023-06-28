@@ -51,62 +51,48 @@ displayCurrentDateAndTime();
 
 // Feature 2 - display the searched city name on the page after the user submits
 
-function findMyCity(event) {
-  event.preventDefault();
+function search(city) {
+  let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-  let cityInput = document.querySelector("#my-city");
-  console.log(cityInput.value);
-
-  // note : create a new variable to "contain" the form input, trim it. Create a new variable to set uppercase and lowercase
-  let cityName = cityInput.value.trim();
-  let capitalisedCityName =
-    cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase();
-  // end
-
-  let newCity = document.querySelector("#current-city");
-  newCity.innerHTML = `${capitalisedCityName}`;
-
-  fetchCityTemp(capitalisedCityName);
-  showLocation(position);
+  axios.get(`${apiUrl}`).then(showCityTemp);
 }
 
-let searchCity = document.querySelector("#search-city");
-searchCity.addEventListener("submit", findMyCity);
+function handleSubmit(event) {
+  event.preventDefault();
 
-// Display the temperature of the searched city
-
-function fetchCityTemp(capitalisedCityName) {
-  let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capitalisedCityName}&units=metric`;
-
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(showCityTemp);
+  let city = document.querySelector("#city-input").value;
+  search(city);
 }
 
 function showCityTemp(response) {
-  //console.log(response.data.main.temp);
+  document.querySelector("#current-city").innerHTML = response.data.name;
 
-  let temp = Math.round(response.data.main.temp);
-  let tempElement = document.querySelector("#current-temp");
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
 
-  tempElement.innerHTML = `${temp}`;
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+
+  document.querySelector("#wind-speed").innerHTML = response.data.wind.speed;
 }
 
-// Location button -- UNFINISHED
-
-function showLocation(position) {
-  // console.log(position);
-  let lat = position.coords.latitude;
-  let long = position.coords.longitude;
-
-  let myLocation = document.querySelector("#current-city");
-  myLocation.innerHTML = `${lat}, ${long}`;
+function displayCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-function showCurrentLocation() {
-  navigator.geolocation.getCurrentPosition(showLocation);
+function searchLocation(position) {
+  let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(`${apiUrl}`).then(showCityTemp);
 }
 
-let button = document.querySelector("#location-button");
-button.addEventListener("click", showCurrentLocation);
+let searchCity = document.querySelector("#search-form");
+searchCity.addEventListener("submit", handleSubmit);
 
-searchCity("Manila");
+let currentLocation = document.querySelector("#location-button");
+currentLocation.addEventListener("click", displayCurrentLocation);
+
+search("Manila");

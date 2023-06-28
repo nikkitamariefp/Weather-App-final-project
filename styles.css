@@ -1,0 +1,102 @@
+h1 {
+  font-size: 190px;
+}
+
+h1,
+h2,
+h4,
+h5,
+.extra-data,
+.loc-button {
+  color: #3c4245;
+}
+
+h1,
+h2,
+h4 {
+  font-weight: bold;
+}
+
+input:placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: #3c4245;
+  padding-left: 15px;
+}
+
+.container {
+  margin: 0 auto;
+  padding-top: 50px;
+  display: block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.main-border {
+  padding: 50px 0 50px 120px;
+  border-radius: 20px;
+  border-color: #3c4245;
+}
+
+.search {
+  width: 600px;
+  height: 70px;
+  border: #5f6769 2px solid;
+  border-radius: 10px;
+}
+
+.submit-button {
+  visibility: hidden;
+}
+
+#current-temp {
+  display: inline;
+}
+.celcius,
+.farehnheit {
+  display: inline;
+  font-size: 20px;
+  vertical-align: 110px;
+}
+
+.superscript a {
+  color: #3c4245;
+}
+
+.my-city,
+.current-emoji {
+  display: inline;
+}
+
+.extra-data {
+  padding-top: 150px;
+  font-style: italic;
+}
+
+.icon {
+  padding-top: px;
+  padding-left: 50px;
+  font-size: 50px;
+}
+
+.current {
+  padding-top: 20px;
+}
+
+.next {
+  border: none;
+  font-size: 16px;
+}
+
+.next-day {
+  font-weight: bold;
+}
+
+.next-date {
+  font-weight: normal;
+}
+
+.loc-button {
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}

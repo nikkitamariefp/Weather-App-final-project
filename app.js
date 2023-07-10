@@ -80,6 +80,13 @@ function showCityTemp(response) {
   document.querySelector("#weather-description").innerHTML =
     response.data.weather[0].description.charAt(0).toUpperCase() +
     response.data.weather[0].description.slice(1);
+
+  document
+    .querySelector("#main-icon")
+    .setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 }
 
 function displayCurrentLocation(event) {

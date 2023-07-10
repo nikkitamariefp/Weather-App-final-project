@@ -24,6 +24,10 @@ input:placeholder {
   padding-left: 15px;
 }
 
+.wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+}
 .container {
   margin: 0 auto;
   padding-top: 50px;

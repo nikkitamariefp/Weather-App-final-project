@@ -66,27 +66,14 @@ function handleSubmit(event) {
 }
 
 function showCityTemp(response) {
- document.querySelector("#current-city").innerHTML = response.data.name;
-
- document.querySelector("#current-temp").innerHTML = Math.round(response.data.main.temp);
-  
-  
-
+  document.querySelector("#current-city").innerHTML = response.data.name;
+  document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-
   document.querySelector("#wind-speed").innerHTML = response.data.wind.speed;
+  document.querySelector("#weather-description").innerHTML = response.data.weather[0].description.charAt(0).toUpperCase() + response.data.weather[0].description.slice(1);
+  document.querySelector("#main-icon").setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 
-  //  console.log(response.data.weather[0].description);
-  document.querySelector("#weather-description").innerHTML =
-    response.data.weather[0].description.charAt(0).toUpperCase() +
-    response.data.weather[0].description.slice(1);
-
-  document
-    .querySelector("#main-icon")
-    .setAttribute(
-      "src",
-      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
+  celsiusTemperature = response.data.main.temp;
 }
 
 function displayCurrentLocation(event) {
@@ -101,10 +88,41 @@ function searchLocation(position) {
   axios.get(`${apiUrl}`).then(showCityTemp);
 }
 
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let FahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  document.querySelector("#current-temperature").innerHTML = Math.round(
+    FahrenheitTemperature);
+}
+
+
+
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  document.querySelector("#current-temperature").innerHTML = Math.round(celsiusTemperature);
+}
+
+
+
+
 let searchCity = document.querySelector("#search-form");
 searchCity.addEventListener("submit", handleSubmit);
 
 let currentLocation = document.querySelector("#location-button");
 currentLocation.addEventListener("click", displayCurrentLocation);
+
+
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
+
+
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+
+
+let celsiusTemperature = null;
+
 
 search("Manila");

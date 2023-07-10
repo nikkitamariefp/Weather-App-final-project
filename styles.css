@@ -52,7 +52,7 @@ input:placeholder {
   visibility: hidden;
 }
 
-#current-temp {
+.temperature {
   display: inline;
 }
 .celcius,
@@ -64,6 +64,7 @@ input:placeholder {
 
 .superscript a {
   color: #3c4245;
+  text-decoration: none;
 }
 
 .my-city,

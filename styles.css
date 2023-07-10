@@ -65,16 +65,16 @@ input:placeholder {
 .my-city,
 .current-emoji,
 .date-time {
-  display: inline;
+  display: inline-block;
   line-height: 30px;
 }
 
 .current-emoji {
-  width: 100px; /* Adjust the desired width */
+  width: 90px; /* Adjust the desired width */
   height: auto;
-  display: inline-block; /* Display the icon as an inline-block element */
-  vertical-align: bottom; /* Align the icon vertically in the middle */
-  margin-bottom: -40px;
+  display: inline; /* Display the icon as an inline-block element */
+  vertical-align: top; /* Align the icon vertically in the middle */
+  margin-top: -15px;
 }
 
 .extra-data {

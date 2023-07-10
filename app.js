@@ -66,11 +66,11 @@ function handleSubmit(event) {
 }
 
 function showCityTemp(response) {
-  document.querySelector("#current-city").innerHTML = response.data.name;
+ document.querySelector("#current-city").innerHTML = response.data.name;
 
-  document.querySelector("#current-temp").innerHTML = Math.round(
-    response.data.main.temp
-  );
+ document.querySelector("#current-temp").innerHTML = Math.round(response.data.main.temp);
+  
+  
 
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 

@@ -75,6 +75,11 @@ function showCityTemp(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 
   document.querySelector("#wind-speed").innerHTML = response.data.wind.speed;
+
+  //  console.log(response.data.weather[0].description);
+  document.querySelector("#weather-description").innerHTML =
+    response.data.weather[0].description.charAt(0).toUpperCase() +
+    response.data.weather[0].description.slice(1);
 }
 
 function displayCurrentLocation(event) {

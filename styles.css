@@ -65,6 +65,7 @@ input:placeholder {
 .my-city,
 .current-emoji {
   display: inline;
+  word-wrap: break-word;
 }
 
 .extra-data {
@@ -78,6 +79,8 @@ input:placeholder {
   padding-left: 50px;
   font-size: 50px;
 }
+
+
 
 .current {
   padding-top: 20px;

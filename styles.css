@@ -36,7 +36,7 @@ input:placeholder {
 }
 
 .main-border {
-  padding: 50px 0 50px 120px;
+  padding: 50px 0 10px 120px;
   border-radius: 20px;
   border-color: #3c4245;
 }
@@ -98,7 +98,7 @@ input:placeholder {
   padding-top: 20px;
 }
 
-.next {
+.weather-forecast {
   border: none;
   font-size: 16px;
 }

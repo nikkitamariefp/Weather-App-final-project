@@ -67,13 +67,24 @@ function handleSubmit(event) {
 
 function showCityTemp(response) {
   document.querySelector("#current-city").innerHTML = response.data.name;
-  document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
+  document.querySelector("#current-temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind-speed").innerHTML = response.data.wind.speed;
-  document.querySelector("#weather-description").innerHTML = response.data.weather[0].description.charAt(0).toUpperCase() + response.data.weather[0].description.slice(1);
-  document.querySelector("#main-icon").setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  document.querySelector("#weather-description").innerHTML =
+    response.data.weather[0].description.charAt(0).toUpperCase() +
+    response.data.weather[0].description.slice(1);
+  document
+    .querySelector("#main-icon")
+    .setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 
   celsiusTemperature = response.data.main.temp;
+
+  displayForecast();
 }
 
 function displayCurrentLocation(event) {
@@ -92,18 +103,47 @@ function displayFahrenheitTemp(event) {
   event.preventDefault();
   let FahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   document.querySelector("#current-temperature").innerHTML = Math.round(
-    FahrenheitTemperature);
+    FahrenheitTemperature
+  );
 }
-
-
 
 function displayCelsiusTemp(event) {
   event.preventDefault();
-  document.querySelector("#current-temperature").innerHTML = Math.round(celsiusTemperature);
+  document.querySelector("#current-temperature").innerHTML =
+    Math.round(celsiusTemperature);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
 
+  let forecastHTML = "";
 
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div
+                class="card mb-4 weather-forecast"
+                style="max-width: 540px;">
+                <div class="row g-0">
+        <div class="col-md-4">
+            <div class="card-body">
+                <small class="text-body-secondary next-day">
+                    ${day} 32°C
+                    <div class="next-date">05/22/2023</div>
+                </small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p class="icon">🌤️</p>
+        </div>
+    </div>
+    </div>  
+    `;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
 
 let searchCity = document.querySelector("#search-form");
 searchCity.addEventListener("submit", handleSubmit);
@@ -111,18 +151,12 @@ searchCity.addEventListener("submit", handleSubmit);
 let currentLocation = document.querySelector("#location-button");
 currentLocation.addEventListener("click", displayCurrentLocation);
 
-
-
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
-
-
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemp);
 
-
 let celsiusTemperature = null;
-
 
 search("Manila");

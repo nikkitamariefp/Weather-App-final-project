@@ -104,11 +104,14 @@ input:placeholder {
 }
 
 .next-day {
-  font-weight: bold;
+  font-weight: bolder;
+  display: inline;
+  font-size: 18px;
 }
 
 .next-date {
   font-weight: normal;
+  font-size: 14px;
 }
 
 .loc-button {

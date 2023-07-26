@@ -125,34 +125,78 @@ function displayCelsiusTemp(event) {
     Math.round(celsiusTemperature);
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+
+  let dateOfMonth = date.getDate();
+
+  let year = date.getFullYear();
+
+  return `${month} ${dateOfMonth}, ${year}`;
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
 
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div
+  forecast.slice(1, 6).forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div
                 class="card mb-4 weather-forecast"
                 style="max-width: 540px;">
                 <div class="row g-0">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card-body">
                 <small class="text-body-secondary next-day">
-                    ${day} 32°C
-                    <div class="next-date">05/22/2023</div>
+                    ${formatForecastDay(forecastDay.dt)} ${Math.round(
+          forecastDay.temp.max
+        )}°C</small>
+                    <div class="next-date">${formatForecastDate(
+                      forecastDay.dt
+                    )}</div>
                 </small>
             </div>
         </div>
-        <div class="col-md-4">
-            <p class="icon">🌤️</p>
+        <div class="col-md-3">
+            <img src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png" width="85 px;">
         </div>
     </div>
     </div>  
     `;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
